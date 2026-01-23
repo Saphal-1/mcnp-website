@@ -26,11 +26,11 @@ function copyIP(ip, element) {
         element.innerText = originalText;
         element.style.borderColor = "";
     }, 2000);
-  window.addEventListener("load", function() {
+}
+window.addEventListener("load", function() {
     const loader = document.getElementById("loading-screen");
     // Small timeout to ensure the transition is smooth
     setTimeout(() => {
         loader.classList.add("loader-hidden");
     }, 1000); 
 });
-}
