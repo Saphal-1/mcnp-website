@@ -1,4 +1,4 @@
-const serverIP = "play.mineleaf.org";
+const serverIP = "play.mcnpnetwork.com";
 
 // Fetch player count
 fetch(`https://api.mcsrvstat.us/2/${serverIP}`)
