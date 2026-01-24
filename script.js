@@ -39,92 +39,86 @@ const firebaseConfig = {
   appId: "1:478826882242:web:f127e7436bfe08355a875b"
 };
 
-firebase.initializeApp(firebaseConfig);
+// Initialize Firebase
+if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+}
 const database = firebase.database();
-const auth = firebase.auth();
-
-// ================= AUTH =================
-const adminEmail = "gamersaphal8@gmail.com";
-let currentUser = null;
-
-const loginBtn = document.getElementById("loginBtn");
-
-loginBtn?.addEventListener("click", () => {
-  if (currentUser) {
-    auth.signOut();
-  } else {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    auth.signInWithPopup(provider);
-  }
-});
-
-auth.onAuthStateChanged(user => {
-  currentUser = user;
-  if (loginBtn) loginBtn.innerText = user ? "Logout" : "Login";
-  
-  const adminStatus = document.getElementById("adminStatus");
-  if (adminStatus) {
-    adminStatus.innerText = (user && user.email === adminEmail) 
-      ? "Logged in as Admin (gamersaphal8)" 
-      : "Everyone can see these reviews. Only Admin can delete.";
-  }
-  loadReviews();
-});
 
 // ================= REVIEW SYSTEM =================
 const reviewForm = document.getElementById("reviewForm");
+const container = document.getElementById("reviewsContainer");
+const SECRET_CODE = "mineleaf-on-top";
 
-reviewForm?.addEventListener("submit", e => {
-  e.preventDefault();
-  if (!currentUser) {
-    alert("Please login to submit a review");
-    return;
-  }
-
-  const newReview = {
-    name: document.getElementById("reviewName").value,
-    rating: Number(document.getElementById("reviewRating").value),
-    message: document.getElementById("reviewMessage").value,
-    date: new Date().toLocaleDateString(),
-    email: currentUser.email
-  };
-
-  database.ref("reviews").push(newReview);
-  reviewForm.reset();
+// 1. Listen for new reviews from Firebase (Shared Storage)
+database.ref("reviews").on("value", (snapshot) => {
+    container.innerHTML = ""; // Clear current list
+    snapshot.forEach((childSnapshot) => {
+        const data = childSnapshot.val();
+        const id = childSnapshot.key;
+        renderReview(id, data);
+    });
 });
 
-// ================= LOAD REVIEWS =================
-function loadReviews() {
-  const container = document.getElementById("reviewsContainer");
-  if (!container) return;
+// 2. Function to create the Review Card UI
+function renderReview(id, data) {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.style.position = "relative";
 
-  database.ref("reviews").off();
-  database.ref("reviews").on("value", snapshot => {
-    container.innerHTML = "";
-    snapshot.forEach(child => {
-      const r = child.val();
-      const card = document.createElement("div");
-      card.className = "card";
-
-      const deleteBtn = (currentUser && currentUser.email === adminEmail)
-          ? `<button onclick="deleteReview('${child.key}')" style="background:red;color:white;border:none;border-radius:4px;cursor:pointer;margin-top:10px;padding:5px 10px;">Delete Post</button>`
-          : "";
-
-      card.innerHTML = `
-        <h3 style="color:var(--primary)">${"★".repeat(r.rating)}</h3>
-        <p>"${r.message}"</p>
-        <small>- ${r.name} (${r.date})</small>
-        ${deleteBtn}
-      `;
-      container.appendChild(card);
-    });
-  });
+    card.innerHTML = `
+        <div style="position: absolute; top: 10px; right: 15px; cursor: pointer; font-size: 20px;" onclick="toggleMenu('${id}')">⋮</div>
+        <div id="menu-${id}" style="display: none; position: absolute; top: 35px; right: 10px; background: #1a1a1a; border: 1px solid var(--primary); border-radius: 5px; z-index: 10;">
+            <button onclick="promptDelete('${id}')" style="background: none; border: none; color: #ff4d4d; padding: 8px 15px; cursor: pointer; font-weight: bold;">Delete Post</button>
+        </div>
+        <h3 style="color:var(--primary)">${"★".repeat(data.rating)}</h3>
+        <p style="margin: 15px 0;">"${data.message}"</p>
+        <small style="opacity: 0.6;">- ${data.name} (${data.date})</small>
+    `;
+    container.prepend(card); // Newest reviews at the top
 }
 
-// ================= DELETE REVIEW (GLOBAL) =================
-window.deleteReview = function(id) {
-  if (!currentUser || currentUser.email !== adminEmail) return;
-  if (confirm("Delete this review?")) {
-    database.ref("reviews/" + id).remove();
-  }
+// 3. Handle Form Submission
+reviewForm?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    
+    const newReview = {
+        name: document.getElementById("reviewName").value,
+        rating: document.getElementById("reviewRating").value,
+        message: document.getElementById("reviewMessage").value,
+        date: new Date().toLocaleDateString()
+    };
+
+    // Push to Firebase (This saves it for EVERYONE to see)
+    database.ref("reviews").push(newReview)
+        .then(() => {
+            reviewForm.reset();
+        })
+        .catch((error) => alert("Error: " + error.message));
+});
+
+// 4. Admin Menu Logic
+window.toggleMenu = function(id) {
+    const menu = document.getElementById(`menu-${id}`);
+    menu.style.display = menu.style.display === "none" ? "block" : "none";
+};
+
+// 5. Delete Logic with Secret Code
+window.promptDelete = function(id) {
+    const userInput = prompt("Enter Admin Code to delete:");
+    if (userInput === SECRET_CODE) {
+        database.ref("reviews/" + id).remove()
+            .then(() => console.log("Deleted"))
+            .catch((err) => alert("Delete failed: " + err.message));
+    } else if (userInput !== null) {
+        alert("Incorrect Code!");
+    }
+};
+
+// Close menus when clicking elsewhere
+window.onclick = function(event) {
+    if (!event.target.matches('div')) {
+        const menus = document.querySelectorAll('[id^="menu-"]');
+        menus.forEach(m => m.style.display = "none");
+    }
 };
