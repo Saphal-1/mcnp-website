@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mineleaf | Player Reviews</title>
+    <title>Mineleaf | Reviews</title>
     <link rel="stylesheet" href="style.css">
     <script defer src="script.js"></script>
 </head>
@@ -16,38 +16,45 @@
             <li><a href="index.html">Home</a></li>
             <li><a href="staff.html">Staff</a></li>
             <li><a href="ranks.html">Ranks</a></li>
-            <li><a href="review.html">Reviews</a></li> <li><a href="index.html#about">About</a></li>
+            <li><a href="review.html">Reviews</a></li>
+            <li><a href="index.html#about">About</a></li>
         </ul>
     </nav>
 </header>
 
 <section class="hero">
     <div class="container">
-        <h2>Community Reviews</h2>
-        <p>See what our players are saying about Nepal's oldest Lifesteal community.</p>
+        <h2>Player Reviews</h2>
+        <p>Share your experience with the Mineleaf community.</p>
     </div>
 </section>
 
 <div class="container">
-    <div class="card-grid">
-        <div class="card">
-            <h3 style="color:var(--primary)">⭐⭐⭐⭐⭐</h3>
-            <p style="margin-top:15px;">"Best Lifesteal server in Nepal! The community is amazing and the staff are very helpful."</p>
-            <p style="color:#64748b; font-size:14px; margin-top:10px;">— Player123</p>
-        </div>
+    <div class="card" style="max-width: 600px; margin: 0 auto 50px auto; text-align: left;">
+        <h3 style="color: var(--primary); margin-bottom: 20px;">Submit a Review</h3>
+        <form id="reviewForm" style="display: flex; flex-direction: column; gap: 15px;">
+            <input type="text" id="reviewName" placeholder="Your Minecraft IGN" required 
+                   style="background: rgba(0,0,0,0.3); border: 1px solid var(--card-border); color: white; padding: 12px; border-radius: 8px;">
+            
+            <select id="reviewRating" required 
+                    style="background: rgba(0,0,0,0.3); border: 1px solid var(--card-border); color: white; padding: 12px; border-radius: 8px;">
+                <option value="" disabled selected>Select Rating</option>
+                <option value="5">★★★★★</option>
+                <option value="4">★★★★☆</option>
+                <option value="3">★★★☆☆</option>
+                <option value="2">★★☆☆☆</option>
+                <option value="1">★☆☆☆☆</option>
+            </select>
 
-        <div class="card">
-            <h3 style="color:var(--primary)">⭐⭐⭐⭐⭐</h3>
-            <p style="margin-top:15px;">"Very balanced gameplay and regular events. Highly recommended for competitive players."</p>
-            <p style="color:#64748b; font-size:14px; margin-top:10px;">— MC_Pro</p>
+            <textarea id="reviewMessage" placeholder="How is your stay at Mineleaf?" required rows="4"
+                      style="background: rgba(0,0,0,0.3); border: 1px solid var(--card-border); color: white; padding: 12px; border-radius: 8px; font-family: inherit;"></textarea>
+
+            <button type="submit" class="ip-box" style="width: 100%; color: white; font-weight: bold; border-style: solid;">POST REVIEW</button>
+        </form>
+    </div>
+
+    <div id="reviewsContainer" class="card-grid">
         </div>
-    </div>
-    
-    <div class="card" style="margin-top: 40px; text-align: center;">
-        <h2 style="color:var(--primary)">Need Support?</h2>
-        <p>If you have issues or want to submit your own review, join our Discord.</p>
-        <div class="ip-box" onclick="window.location.href='https://discord.gg/mcnp'">Join Discord Support</div>
-    </div>
 </div>
 
 <footer>
@@ -59,10 +66,56 @@
         <div class="footer-legal">
             <a href="privacy.html">Privacy Policy</a>
             <a href="terms.html">Terms of Service</a>
-            <p style="margin-top:15px; font-size:14px;">Designed by <a href="https://saphal.is-a.dev" style="color:var(--primary); margin:0;">Saphal Thapaliya </a></p>
         </div>
     </div>
 </footer>
 
+<script>
+    // THE REVIEW LOGIC
+    const reviewForm = document.getElementById("reviewForm");
+    const reviewsContainer = document.getElementById("reviewsContainer");
+
+    function loadReviews() {
+        const reviews = JSON.parse(localStorage.getItem("mineleafReviews")) || [];
+        reviewsContainer.innerHTML = "";
+
+        if(reviews.length === 0) {
+            reviewsContainer.innerHTML = `<p style="grid-column: 1/-1; opacity: 0.5;">No reviews yet. Be the first!</p>`;
+        }
+
+        reviews.reverse().forEach(r => {
+            const div = document.createElement("div");
+            div.className = "card"; // Matches your site's card style
+            div.innerHTML = `
+                <h3 style="color:var(--primary)">${"★".repeat(r.rating)}</h3>
+                <p style="margin: 15px 0;">"${r.message}"</p>
+                <div style="border-top: 1px solid var(--card-border); padding-top: 10px; margin-top: 10px;">
+                    <small style="color: var(--primary)">${r.name}</small><br>
+                    <small style="opacity: 0.5; font-size: 11px;">${r.date}</small>
+                </div>
+            `;
+            reviewsContainer.appendChild(div);
+        });
+    }
+
+    reviewForm?.addEventListener("submit", e => {
+        e.preventDefault();
+        const review = {
+            name: document.getElementById("reviewName").value.trim(),
+            rating: Number(document.getElementById("reviewRating").value),
+            message: document.getElementById("reviewMessage").value.trim(),
+            date: new Date().toLocaleDateString()
+        };
+
+        const reviews = JSON.parse(localStorage.getItem("mineleafReviews")) || [];
+        reviews.push(review);
+        localStorage.setItem("mineleafReviews", JSON.stringify(reviews));
+
+        reviewForm.reset();
+        loadReviews();
+    });
+
+    loadReviews();
+</script>
 </body>
-</html>
+                </html>
