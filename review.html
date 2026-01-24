@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mineleaf | Reviews</title>
     <link rel="stylesheet" href="style.css">
-    <script defer src="script.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
 </head>
 <body>
 
@@ -17,93 +19,38 @@
             <li><a href="staff.html">Staff</a></li>
             <li><a href="ranks.html">Ranks</a></li>
             <li><a href="review.html">Reviews</a></li>
-            <li><a href="index.html#about">About</a></li>
+            <li><button id="loginBtn" class="ip-box" style="padding: 5px 15px; margin-left:10px;">Login</button></li>
         </ul>
     </nav>
 </header>
 
 <section class="hero">
     <div class="container">
-        <h2>Player Reviews</h2>
-        <p>Share your experience with the Mineleaf community.</p>
+        <h2>Community Feed</h2>
+        <p id="adminStatus">Everyone can see these reviews. Only Admin can delete.</p>
     </div>
 </section>
 
 <div class="container">
-    <div class="card" style="max-width: 600px; margin: 0 auto 50px auto; text-align: left;">
-        <h3 style="color: var(--primary); margin-bottom: 20px;">Submit a Review</h3>
+    <div class="card" style="max-width: 600px; margin: 0 auto 40px auto;">
         <form id="reviewForm" style="display: flex; flex-direction: column; gap: 15px;">
-            <input type="text" id="reviewName" placeholder="Your Minecraft IGN" required 
-                   style="background: rgba(0,0,0,0.3); border: 1px solid var(--card-border); color: white; padding: 12px; border-radius: 8px;">
-            
-            <select id="reviewRating" required 
-                    style="background: rgba(0,0,0,0.3); border: 1px solid var(--card-border); color: white; padding: 12px; border-radius: 8px;">
-                <option value="" disabled selected>Select Rating</option>
+            <input type="text" id="reviewName" placeholder="Minecraft IGN" required style="background: rgba(0,0,0,0.3); border: 1px solid var(--card-border); color: white; padding: 12px; border-radius: 8px;">
+            <select id="reviewRating" required style="background: rgba(0,0,0,0.3); border: 1px solid var(--card-border); color: white; padding: 12px; border-radius: 8px;">
                 <option value="5">★★★★★</option>
                 <option value="4">★★★★☆</option>
                 <option value="3">★★★☆☆</option>
-                <option value="2">★★☆☆☆</option>
-                <option value="1">★☆☆☆☆</option>
             </select>
-
-            <textarea id="reviewMessage" placeholder="How is your stay at Mineleaf?" required rows="4"
-                      style="background: rgba(0,0,0,0.3); border: 1px solid var(--card-border); color: white; padding: 12px; border-radius: 8px; font-family: inherit;"></textarea>
-
-            <button type="submit" class="ip-box" style="width: 100%; color: white; font-weight: bold; border-style: solid;">POST REVIEW</button>
+            <textarea id="reviewMessage" placeholder="Your review..." required style="background: rgba(0,0,0,0.3); border: 1px solid var(--card-border); color: white; padding: 12px; border-radius: 8px;"></textarea>
+            <button type="submit" class="ip-box" style="width: 100%; color: white;">POST REVIEW</button>
         </form>
     </div>
 
-    <div id="reviewsContainer" class="card-grid">
-        </div>
+    <div id="reviewsContainer" class="card-grid"></div>
 </div>
 
-<footer>
-    <div class="footer-content">
-        <div>
-            <p style="font-weight:bold; font-size:18px;">MINELEAF</p>
-            <p style="color:#64748b; font-size:14px;">© 2026 Mineleaf Network. All Rights Reserved.</p>
-        </div>
-        <div class="footer-legal">
-            <a href="privacy.html">Privacy Policy</a>
-            <a href="terms.html">Terms of Service</a>
-        </div>
-    </div>
-</footer>
-
-<script>
-    // THE REVIEW LOGIC
-    const reviewForm = document.getElementById("reviewForm");
-    const reviewsContainer = document.getElementById("reviewsContainer");
-
-    function loadReviews() {
-        const reviews = JSON.parse(localStorage.getItem("mineleafReviews")) || [];
-        reviewsContainer.innerHTML = "";
-
-        if(reviews.length === 0) {
-            reviewsContainer.innerHTML = `<p style="grid-column: 1/-1; opacity: 0.5;">No reviews yet. Be the first!</p>`;
-        }
-
-        reviews.reverse().forEach(r => {
-            const div = document.createElement("div");
-            div.className = "card"; // Matches your site's card style
-            div.innerHTML = `
-                <h3 style="color:var(--primary)">${"★".repeat(r.rating)}</h3>
-                <p style="margin: 15px 0;">"${r.message}"</p>
-                <div style="border-top: 1px solid var(--card-border); padding-top: 10px; margin-top: 10px;">
-                    <small style="color: var(--primary)">${r.name}</small><br>
-                    <small style="opacity: 0.5; font-size: 11px;">${r.date}</small>
-                </div>
-            `;
-            reviewsContainer.appendChild(div);
-        });
-    }
-
-    reviewForm?.addEventListener("submit", e => {
-        e.preventDefault();
-        const review = {
-            name: document.getElementById("reviewName").value.trim(),
-            rating: Number(document.getElementById("reviewRating").value),
-            message: document.getElementById("reviewMessage").value.trim(),
+<script src="script.js"></script>
+</body>
+</html>            message: document.getElementById("reviewMessage").value.trim(),
             date: new Date().toLocaleDateString()
         };
 
