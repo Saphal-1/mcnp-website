@@ -39,6 +39,8 @@
                 <option value="5">★★★★★</option>
                 <option value="4">★★★★☆</option>
                 <option value="3">★★★☆☆</option>
+                <option value="2">★★☆☆☆</option>
+                <option value="1">★☆☆☆☆</option>
             </select>
             <textarea id="reviewMessage" placeholder="Your review..." required style="background: rgba(0,0,0,0.3); border: 1px solid var(--card-border); color: white; padding: 12px; border-radius: 8px;"></textarea>
             <button type="submit" class="ip-box" style="width: 100%; color: white;">POST REVIEW</button>
@@ -50,19 +52,4 @@
 
 <script src="script.js"></script>
 </body>
-</html>            message: document.getElementById("reviewMessage").value.trim(),
-            date: new Date().toLocaleDateString()
-        };
-
-        const reviews = JSON.parse(localStorage.getItem("mineleafReviews")) || [];
-        reviews.push(review);
-        localStorage.setItem("mineleafReviews", JSON.stringify(reviews));
-
-        reviewForm.reset();
-        loadReviews();
-    });
-
-    loadReviews();
-</script>
-</body>
-                </html>
+</html>
