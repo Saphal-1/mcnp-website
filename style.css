@@ -179,3 +179,9 @@ footer {
     opacity: 0;
     pointer-events: none;
 }
+
+.footer-legal {
+    background: none;       /* makes the background fully transparent */
+    color: #64748b;         /* keeps the text visible */
+    padding: 0;             /* optional, remove extra spacing */
+}
