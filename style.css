@@ -180,8 +180,7 @@ footer {
     pointer-events: none;
 }
 
-.footer-legal {
-    background: none;       /* makes the background fully transparent */
-    color: #64748b;         /* keeps the text visible */
-    padding: 0;             /* optional, remove extra spacing */
+.footer-legal a:hover { 
+    color: var(--secondary);
+    text-shadow: 0 0 5px var(--secondary-glow);
 }
