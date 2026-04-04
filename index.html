@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mineleaf | Nepal's Oldest Lifesteal Server</title>
+    <title>MCNP Network | Nepal's Lifesteal Server</title>
     <link rel="stylesheet" href="style.css">
     <script defer src="script.js"></script>
 </head>
@@ -11,7 +11,7 @@
 
 <header>
     <nav>
-        <h1>MINELEAF</h1>
+        <h1>MCNP Network</h1>
         <ul>
             <li><a href="#home">Home</a></li>
             <li><a href="staff.html">Staff</a></li>
@@ -23,9 +23,12 @@
 </header>
 
 <section class="hero" id="home">
+    <!-- NEW overlay for blur -->
+    <div class="hero-overlay"></div>
+
     <div class="container">
-        <h2>Welcome to Mineleaf</h2>
-        <p>🌿 Lifesteal • Events • Custom Ranks • Friendly Community</p>
+        <h2>Welcome to MCNP Network</h2>
+        <p>⚔️ Lifesteal • Events • Custom Ranks • Competitive Gameplay</p>
         <div class="card" style="display:inline-block; margin-top:30px; padding: 15px 40px;">
             <h3 id="players" style="color:var(--primary)">Loading Players...</h3>
         </div>
@@ -36,12 +39,12 @@
     <div class="card-grid">
         <div class="card">
             <h2>☕ Java Edition</h2>
-            <div class="ip-box" onclick="copyIP('play.mineleaf.org', this)">play.mineleaf.org</div>
+            <div class="ip-box" onclick="copyIP('play.mcnpnetwork.com', this)">play.mcnpnetwork.com</div>
             <small>Click to copy address</small>
         </div>
         <div class="card">
             <h2>📱 Bedrock Edition</h2>
-            <div class="ip-box" onclick="copyIP('play.mineleaf.org', this)">play.mineleaf.org</div>
+            <div class="ip-box" onclick="copyIP('play.mcnpnetwork.com', this)">play.mcnpnetwork.com</div>
             <small>Click to copy address</small>
         </div>
     </div>
@@ -50,12 +53,12 @@
 <section class="container" id="about">
     <div class="card-grid">
         <div class="card" style="grid-column: span 2; text-align: left;">
-            <h2 style="color:var(--primary)">About Mineleaf</h2>
-            <p>Mineleaf proudly stands as Nepal’s oldest and most trusted Lifesteal Minecraft server. Built by passionate players for a strong and competitive community, our Lifesteal mode is a true test of skill.</p>
+            <h2 style="color:var(--primary)">About MCNP Network</h2>
+            <p>MCNP Network is a competitive and community-driven Lifesteal Minecraft server in Nepal. Built for skilled players, it delivers smooth gameplay, fair PvP, and an engaging multiplayer experience.</p>
             <ul style="margin-top:20px; color:#94a3b8; list-style: '✔  '; padding-left: 20px;">
-                <li>Fair PvP & Anti-Cheat</li>
-                <li>Custom Balanced Lifesteal</li>
-                <li>Active Nepali Community</li>
+                <li>Fair PvP & Advanced Anti-Cheat</li>
+                <li>Balanced Lifesteal System</li>
+                <li>Active & Competitive Community</li>
             </ul>
         </div>
         <div class="card">
@@ -68,21 +71,23 @@
 <footer>
     <div class="footer-content">
         <div>
-            <p style="font-weight:bold; font-size:18px;">MINELEAF</p>
-            <p style="color:#64748b; font-size:14px;">© 2026 Mineleaf Network. All Rights Reserved.</p>
+            <p style="font-weight:bold; font-size:18px;">MCNP NETWORK</p>
+            <p style="color:#64748b; font-size:14px;">© 2026 MCNP Network. All Rights Reserved.</p>
             <p style="color:#475569; font-size:12px; margin-top:5px;">Not an official Minecraft product. Not approved by or associated with Mojang.</p>
         </div>
         <div class="footer-legal">
             <a href="privacy.html">Privacy Policy</a>
             <a href="terms.html">Terms of Service</a>
-            <p style="margin-top:15px; font-size:14px;">Designed by <a href="https://saphal.is-a.dev" style="color:var(--primary); margin:0;">Saphal Thapaliya </a></p>
+            <p style="margin-top:15px; font-size:14px;">Designed by <a href="https://saphal.is-a.dev" style="color:var(--primary); margin:0;">Saphal Thapaliya</a></p>
         </div>
     </div>
 </footer>
 
+<!-- KEEP LOADING SCREEN (just color updated via CSS later) -->
+<div id="loading-screen" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #020617; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; transition: opacity 0.5s ease;">
+    <div style="font-size: 80px; animation: pulse 1.5s infinite ease-in-out;">⚔️</div>
+    <p style="margin-top: 20px; font-family: 'Press Start 2P', cursive; color: var(--primary); font-size: 12px; letter-spacing: 2px;">LOADING MCNP...</p>
+</div>
+
 </body>
-    <div id="loading-screen" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #020617; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; transition: opacity 0.5s ease;">
-    <div style="font-size: 80px; animation: pulse 1.5s infinite ease-in-out;">🌿</div>
-    <p style="margin-top: 20px; font-family: 'Press Start 2P', cursive; color: #22c55e; font-size: 12px; letter-spacing: 2px;">LOADING MINELEAF...</p>
-    </div>
 </html>
