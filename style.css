@@ -142,10 +142,11 @@ nav ul li a:hover {
 
 /* FOOTER */
 footer {
-    background: #010409;
+    background: none; /* removed solid background */
     padding: 60px 20px 30px;
     margin-top: 100px;
-    border-top: 1px solid var(--card-border);
+    border-top: 1px solid var(--card-border); /* keeps a subtle divider */
+    backdrop-filter: blur(12px); /* optional: glassy blur effect for premium look */
 }
 
 .footer-content {
@@ -163,10 +164,13 @@ footer {
     text-decoration: none;
     font-size: 14px;
     margin-right: 20px;
+    transition: 0.3s;
 }
 
-.footer-legal a:hover { color: var(--secondary); }
-
+.footer-legal a:hover { 
+    color: var(--secondary); 
+    text-shadow: 0 0 5px var(--secondary-glow); /* adds subtle glow */
+}
 /* Loading Animation */
 @keyframes pulse {
     0% { transform: scale(1); filter: drop-shadow(0 0 0px var(--primary-glow)); }
