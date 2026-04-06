@@ -184,4 +184,72 @@ footer {
     pointer-events: none;
 }
 
+/* BADGES */
+.badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: var(--secondary);
+    padding: 5px 10px;
+    border-radius: 10px;
+    font-size: 12px;
+}
+
+.badge.top {
+    background: gold;
+    color: black;
+}
+
+/* CARD POSITION FIX */
+.card {
+    position: relative;
+    overflow: hidden;
+}
+
+/* BUTTON ANIMATION */
+button {
+    transition: 0.3s;
+}
+
+button:active {
+    transform: scale(0.9);
+}
+
+/* FLOAT ANIMATION */
+.card:hover {
+    animation: float 2s infinite ease-in-out;
+}
+
+@keyframes float {
+    0% { transform: translateY(-10px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(-10px); }
+}
+
+/* SHINE EFFECT */
+.card::after {
+    content: "";
+    position: absolute;
+    width: 200%;
+    height: 100%;
+    top: 0;
+    left: -200%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.1), transparent);
+    transition: 0.5s;
+}
+
+.card:hover::after {
+    left: 100%;
+}
+
+/* ROYAL GLOW */
+.rank.royal {
+    box-shadow: 0 0 40px rgba(168,85,247,0.5);
+}
+
+/* CRATE COLORS */
+.crate.bronze { border-color: #b45309; }
+.crate.silver { border-color: #9ca3af; }
+.crate.gold { border-color: #facc15; }
+.crate.diamond { border-color: #22d3ee; }
 
