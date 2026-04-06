@@ -1,97 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mineleaf | Official Ranks</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MCNP Network | Premium Shop</title>
+<link rel="stylesheet" href="style.css">
+<script defer src="script.js"></script>
 </head>
+
 <body>
 
 <header>
-    <nav>
-        <h1>MINELEAF</h1>
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="staff.html">Staff</a></li>
-            <li><a href="store.html">Store</a></li>
-            <li><a href="review.html">Reviews</a></li> 
-            <li><a href="index.html#about">About</a></li>
-        </ul>
-    </nav>
+<nav>
+<h1>MCNP</h1>
+<ul>
+<li><a href="index.html#home">Home</a></li>
+<li><a href="staff.html">Staff</a></li>
+<li><a href="#">Store</a></li>
+<li><a href="review.html">Reviews</a></li> 
+<li><a href="index.html#about">About</a></li>
+</ul>
+</nav>
 </header>
 
 <section class="hero">
-    <div class="container">
-        <h2>Mineleaf Ranks</h2>
-        <p>Support the server and unlock exclusive perks to enhance your experience.</p>
-    </div>
+<div class="hero-overlay"></div>
+<div class="container">
+<h2>🛒 MCNP Premium Shop</h2>
+<p>Unlock powerful perks & dominate every gamemode ⚔️</p>
+</div>
 </section>
 
+<!-- RANKS -->
 <div class="container">
-    <div class="card-grid">
+<h2 style="text-align:center;">👑 Ranks (Season 4)</h2>
 
-        <div class="card" style="border-color: #fbbf24;">
-            <h2 style="color: #fbbf24;">👑 Royal</h2>
-            <div style="margin: 20px 0; font-size: 0.95rem; text-align: left; padding-left: 20px;">
-                <p>• Royal Prefix</p>
-                <p>• Extra Homes</p>
-                <p>• Special Kits</p>
-                <p>• Priority Support</p>
-            </div>
-            <button onclick="window.location.href='#'" style="width: 100%; background: #fbbf24;">View Store</button>
-        </div>
+<div class="card-grid">
 
-        <div class="card" style="border-color: #ef4444;">
-            <h2 style="color: #ef4444;">🔥 Legend</h2>
-            <div style="margin: 20px 0; font-size: 0.95rem; text-align: left; padding-left: 20px;">
-                <p>• Legend Prefix</p>
-                <p>• Increased Lifesteal</p>
-                <p>• Advanced Kits</p>
-                <p>• Exclusive Commands</p>
-            </div>
-            <button onclick="window.location.href='#'" style="width: 100%; background: #ef4444; color: white;">View Store</button>
-        </div>
-
-        <div class="card" style="border-color: #a855f7;">
-            <h2 style="color: #a855f7;">⚡ Mythic</h2>
-            <div style="margin: 20px 0; font-size: 0.95rem; text-align: left; padding-left: 20px;">
-                <p>• Mythic Prefix</p>
-                <p>• Maximum Lifesteal</p>
-                <p>• All Legend Perks</p>
-                <p>• Mythic Exclusive Powers</p>
-            </div>
-            <button onclick="window.location.href='#'" style="width: 100%; background: #a855f7; color: white;">View Store</button>
-        </div>
-
-    </div>
+<div class="card rank elite">
+<span class="badge">Starter</span>
+<h2>⚔️ Elite</h2>
+<p class="price">Rs 149</p>
+<div class="rank-content">
+<p>• 4 Homes</p>
+<p>• Vault Access</p>
+<p>• Fly, EC, Anvil</p>
+<p>• Kit: Yana</p>
+</div>
+<button onclick="buyNow()">Buy Now</button>
 </div>
 
-<div class="container" style="text-align: center; margin-top: -20px;">
-    <p style="color: #64748b; font-size: 0.9rem;">
-        All purchases go directly toward server hosting and development costs. 🌿
-    </p>
+<div class="card rank mythic">
+<span class="badge">Popular</span>
+<h2>⚡ Mythic</h2>
+<p class="price">Rs 199</p>
+<div class="rank-content">
+<p>• 5 Homes</p>
+<p>• Better Vault</p>
+<p>• Fly + Commands</p>
+<p>• Kit: Yatri</p>
+</div>
+<button onclick="buyNow()">Buy Now</button>
+</div>
+
+<div class="card rank champion">
+<h2>🏆 Champion</h2>
+<p class="price">Rs 399</p>
+<div class="rank-content">
+<p>• 6 Homes</p>
+<p>• Repair + Head</p>
+<p>• Temp Fly Boost</p>
+</div>
+<button onclick="buyNow()">Buy Now</button>
+</div>
+
+<div class="card rank legend">
+<h2>🔥 Legend</h2>
+<p class="price">Rs 499</p>
+<div class="rank-content">
+<p>• 8 Homes</p>
+<p>• Advanced Commands</p>
+<p>• Kit: Gurkha</p>
+</div>
+<button onclick="buyNow()">Buy Now</button>
+</div>
+
+<div class="card rank royal">
+<span class="badge top">BEST</span>
+<h2>👑 Royal</h2>
+<p class="price">Rs 799</p>
+<div class="rank-content">
+<p>• 10 Homes</p>
+<p>• Full Access</p>
+<p>• Kits: Everest, Lakhe</p>
+</div>
+<button onclick="buyNow()">Buy Now</button>
+</div>
+
+</div>
+</div>
+
+<!-- CRATES -->
+<div class="container">
+<h2 style="text-align:center;">🎁 Crate Keys</h2>
+
+<div class="card-grid">
+
+<div class="card crate bronze">
+<h2>🥉 Bronze</h2>
+<p class="price">Rs 5</p>
+<button onclick="buyNow()">Buy</button>
+</div>
+
+<div class="card crate silver">
+<h2>🥈 Silver</h2>
+<p class="price">Rs 10</p>
+<button onclick="buyNow()">Buy</button>
+</div>
+
+<div class="card crate gold">
+<h2>🥇 Gold</h2>
+<p class="price">Rs 20</p>
+<button onclick="buyNow()">Buy</button>
+</div>
+
+<div class="card crate diamond">
+<h2>💎 Diamond</h2>
+<p class="price">Rs 40</p>
+<button onclick="buyNow()">Buy</button>
+</div>
+
+</div>
 </div>
 
 <footer>
-    <div class="footer-content" style="background: none; padding: 60px 20px 30px;">
-        <div>
-            <p style="font-weight:bold; font-size:18px; color:white; text-shadow: 0 0 10px var(--primary-glow);">
-                MCNP NETWORK
-            </p>
-            <p style="color:#94a3b8; font-size:14px;">© 2026 MCNP Network. All Rights Reserved.</p>
-            <p style="color:#64748b; font-size:12px; margin-top:5px;">
-                Not an official Minecraft product. Not approved by or associated with Mojang.
-            </p>
-        </div>
-        <div class="footer-legal" style="background: none; padding:0;">
-            <a href="privacy.html">Privacy Policy</a>
-            <a href="terms.html">Terms of Service</a>
-            <p style="margin-top:15px; font-size:14px;">
-                Designed by <a href="https://saphal.is-a.dev" style="color:var(--primary); margin:0;">Saphal Thapaliya</a>
-            </p>
-        </div>
-    </div>
+<div class="footer-content">
+<p>© 2026 MCNP Network</p>
+</div>
 </footer>
 
 </body>
