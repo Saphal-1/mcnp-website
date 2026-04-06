@@ -122,3 +122,13 @@ window.onclick = function(event) {
         menus.forEach(m => m.style.display = "none");
     }
 };
+
+function buyNow() {
+    const btn = event.target;
+    btn.innerText = "Redirecting...";
+    btn.style.opacity = "0.7";
+
+    setTimeout(() => {
+        window.open("https://discord.gg/mcnp", "_blank");
+    }, 800);
+}
